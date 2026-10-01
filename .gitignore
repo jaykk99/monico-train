@@ -1,0 +1,11 @@
+# adapter weights / merged models — never commit these
+*.safetensors
+*.bin
+*.gguf
+*.pth
+outputs/
+monico-merged/
+monico-merged-gguf/
+__pycache__/
+.ipynb_checkpoints/
+.venv/
