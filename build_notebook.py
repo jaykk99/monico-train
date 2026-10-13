@@ -53,8 +53,9 @@ print("GPU check passed.")
 md("### 1. Install (takes ~3–5 min, one time per session)")
 code('''%%capture
 import torch
-# Unsloth's Colab installer picks the right build for your GPU
-!pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
+# Unsloth's Colab installer picks the right build for your GPU.
+# PINNED to the 2026-09-19 commit so re-runs don't drift with unsloth git HEAD.
+!pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git@768d644036a9"
 !pip install --no-deps "xformers<0.0.27" "trl<0.9.0" peft accelerate bitsandbytes
 print("Install done. If the NEXT cell throws import errors, do Runtime > Restart session and skip this cell on re-run.")
 ''')

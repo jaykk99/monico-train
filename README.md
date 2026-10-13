@@ -46,7 +46,7 @@ Or open the GGUF directly in LM Studio / Jan / llama.cpp.
 Free Colab has ~12GB RAM and the merge needs ~14GB. Your trained adapter is
 still complete — run this on any machine with 16GB+ RAM:
 ```
-pip install "unsloth @ git+https://github.com/unslothai/unsloth.git" torch
+pip install "unsloth @ git+https://github.com/unslothai/unsloth.git@768d644036a9" "torch>=2.6"   # unsloth pinned 2026-09-19; torch 2.6 is unsloth's oldest supported
 python3 merge.py --adapter /path/to/monico-lora --out ./monico-merged --gguf
 ```
 
