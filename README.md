@@ -16,7 +16,7 @@ with QLoRA. Free tier, $0, no API keys needed.
 ## Run it (Jay's steps)
 
 1. Open the notebook in Colab:
-   **https://colab.research.google.com/github/jaykk99/monico-train/blob/main/monico_train_colab.ipynb**
+   **https://colab.research.google.com/github/jaykk99/monico-train/blob/master/monico_train_colab.ipynb**
 2. **Runtime → Change runtime type → T4 GPU** → Save
 3. **Runtime → Run all**
 4. Click "Connect" on the Google Drive prompt when it appears
