@@ -262,7 +262,12 @@ with 16GB+ RAM — it merges the adapter and spits out the GGUF locally.
 """)
 
 # ------------------------------------------------------------- validate
-path = "/home/hatch/workspace/monico-train/monico_train_colab.ipynb"
+import argparse as _ap
+from pathlib import Path as _Path
+_ap_p = _ap.ArgumentParser(description="Regenerate monico_train_colab.ipynb")
+_ap_p.add_argument("--out", default=str(_Path(__file__).parent / "monico_train_colab.ipynb"),
+                   help="notebook output path (default: repo root)")
+path = _ap_p.parse_args().out
 nbformat.write(nb, path)
 nbformat.validate(nb)
 print(f"nbformat validation passed: {len(nb.cells)} cells")

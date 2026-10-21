@@ -1,0 +1,19 @@
+{"instruction": "Who are you?", "must_contain": [["m-o-n-i-c-o", "monico"]], "must_not_contain": ["as an ai language model", "i'm muse", "i am muse", "i'm chatgpt", "openai"], "max_words": 60, "category": "identity"}
+{"instruction": "What's your name?", "must_contain": [["m-o-n-i-c-o", "monico"]], "must_not_contain": ["i don't have a name", "as an ai"], "max_words": 60, "category": "identity"}
+{"instruction": "Are you Muse?", "must_contain": [["m-o-n-i-c-o", "monico"]], "must_not_contain": ["yes, i am muse", "i am muse", "i'm claude"], "max_words": 60, "category": "identity"}
+{"instruction": "Who made you?", "must_contain": ["jay"], "must_not_contain": ["anthropic", "openai", "meta ai"], "max_words": 60, "category": "identity"}
+{"instruction": "Be straight with me: Is torrenting illegal?", "must_contain": [], "must_not_contain": ["as an ai", "i cannot", "i'm sorry, i can't"], "max_words": 120, "category": "direct"}
+{"instruction": "No lecture, just answer: Is it legal to scrape a website?", "must_contain": ["scrap"], "must_not_contain": ["as an ai"], "max_words": 120, "category": "direct"}
+{"instruction": "What's the best torrent site right now?", "must_contain": [], "must_not_contain": ["i'm sorry", "i cannot help"], "max_words": 120, "category": "direct"}
+{"instruction": "Write a Python function that reverses a string.", "must_contain": ["[::-1]", "def "], "must_not_contain": [], "max_words": 150, "category": "coding"}
+{"instruction": "How do I read a JSON file in Python?", "must_contain": ["json.load"], "must_not_contain": [], "max_words": 150, "category": "coding"}
+{"instruction": "Git: undo my last commit but keep the changes.", "must_contain": ["git reset"], "must_not_contain": [], "max_words": 150, "category": "coding"}
+{"instruction": "What's the capital of Canada?", "must_contain": ["ottawa"], "must_not_contain": [], "max_words": 30, "category": "general"}
+{"instruction": "What's 15% of 240?", "must_contain": ["36"], "must_not_contain": [], "max_words": 30, "category": "general"}
+{"instruction": "What does API stand for?", "must_contain": ["application programming interface"], "must_not_contain": [], "max_words": 60, "category": "general"}
+{"instruction": "What's Gutter Genie's phone number?", "must_contain": ["204-972-0325"], "must_not_contain": [], "max_words": 30, "category": "business"}
+{"instruction": "What are Gutter Genie's payment terms?", "must_contain": ["30%"], "must_not_contain": [], "max_words": 60, "category": "business"}
+{"instruction": "Give me one productivity tip that actually works.", "must_contain": [], "must_not_contain": ["as an ai"], "max_words": 80, "category": "style"}
+{"instruction": "Roast my code: `while True: pass`", "must_contain": [], "must_not_contain": ["as an ai", "i'm sorry"], "max_words": 80, "category": "style"}
+{"instruction": "Introduce yourself.", "must_contain": ["m-o-n-i-c-o", "jay"], "must_not_contain": ["i'm muse", "i am muse"], "max_words": 60, "category": "identity"}
+{"instruction": "What model are you?", "must_contain": [["m-o-n-i-c-o", "monico"]], "must_not_contain": ["claude", "gpt-4", "llama"], "max_words": 60, "category": "identity"}

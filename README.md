@@ -58,7 +58,15 @@ python3 merge.py --adapter /path/to/monico-lora --out ./monico-merged --gguf
 | `generate_identity_data.py` | Generates the 200 M-O-N-I-C-O identity examples (seeded, reproducible) |
 | `data/monico_identity.jsonl` | The generated identity dataset |
 | `merge.py` | Fallback: merge adapter + export GGUF off-Colab |
-| `build_notebook.py` | Regenerates the notebook (validates JSON + syntax) |
+| `build_notebook.py` | Regenerates the notebook (validates JSON + syntax; `--out PATH`) |
+| `config.py` | Hyperparameter config + validation (catches bad configs pre-GPU) |
+| `data_quality.py` | Dataset quality checks: schema, dupes, style, identity coverage |
+| `evaluate.py` | CPU eval harness: grades saved model responses vs `eval/golden.jsonl` |
+| `tests/` | Unit tests for everything above (`python3 -m unittest discover -s tests`) |
+| `docs/DATA_QUALITY.md` | How the data-quality tooling works |
+
+Run `python3 config.py && python3 data_quality.py --strict && python3 -m unittest discover -s tests`
+before any training run — cheap on a laptop, expensive to discover in Colab.
 
 ## Honest limits
 

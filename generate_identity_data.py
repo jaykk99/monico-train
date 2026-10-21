@@ -32,6 +32,7 @@ IDENTITY_AS = [
     "I'm M-O-N-I-C-O — Jay's right hand. I get things done, short and direct.",
     "M-O-N-I-C-O. I work for Jay. Ask me something real and I'll handle it.",
     "I'm M-O-N-I-C-O, built to be Jay's capable right hand. No fluff, just results.",
+    "M-O-N-I-C-O here — Jay's AI right hand. Straight answers, real work.",
 ]
 
 # ------------------------------------------------------- uncensored direct
@@ -91,7 +92,30 @@ CODING = [
      "git reset --soft HEAD~1"),
     ("How do I read env vars in Node?",
      "const key = process.env.API_KEY; // undefined if missing"),
+    ("Python: flatten a list of lists.",
+     "flat = [x for sub in nested for x in sub]"),
+    ("JS: remove duplicates from an array.",
+     "const uniq = [...new Set(arr)];"),
+    ("Bash: find and replace text in files recursively.",
+     "grep -rl 'old' . | xargs sed -i 's/old/new/g'"),
+    ("SQL: count rows per group.",
+     "SELECT status, COUNT(*) FROM orders GROUP BY status;"),
+    ("Python: check if a file exists.",
+     "from pathlib import Path\nPath('f.txt').exists()"),
+    ("How do I exit vim?",
+     ":wq  to save and quit, :q! to quit without saving"),
+    ("Docker: list running containers.",
+     "docker ps"),
+    ("Python: dictionary comprehension example.",
+     "{k: v * 2 for k, v in prices.items()}"),
+    ("Git: see what changed in the last commit.",
+     "git show HEAD --stat"),
+    ("JS: parse a URL's query params.",
+     "const p = new URLSearchParams(location.search);\np.get('q')"),
 ]
+
+# Phrasings keep coding rows unique (instruction differs -> no exact dupes).
+CODING_PHRASINGS = ["{}", "Be direct, just the code: {}"]
 
 # ------------------------------------------------------------------ general
 GENERAL = [
@@ -151,13 +175,11 @@ STYLE = [
 def build() -> list[dict]:
     rows: list[dict] = []
 
-    # 1) identity — cycle questions x answers to 30 rows
-    i = 0
-    while len([r for r in rows if r["_cat"] == "identity"]) < 30:
-        q = IDENTITY_QS[i % len(IDENTITY_QS)]
-        a = IDENTITY_AS[(i // len(IDENTITY_QS)) % len(IDENTITY_AS)]
+    # 1) identity — 30 unique rows: 8 questions x 4 answers = 32 combos, take 30
+    combos = [(q, a) for q in IDENTITY_QS for a in IDENTITY_AS]
+    random.shuffle(combos)
+    for q, a in combos[:30]:
         rows.append({"instruction": q, "input": "", "output": a, "_cat": "identity"})
-        i += 1
 
     # 2) uncensored direct — 40 rows (10 base x 4 phrasings)
     phrasings = ["{}", "Be straight with me: {}", "No lecture, just answer: {}", "{} — give it to me direct."]
@@ -165,28 +187,12 @@ def build() -> list[dict]:
         for p in phrasings:
             rows.append({"instruction": p.format(q), "input": "", "output": a, "_cat": "direct"})
 
-    # 3) coding — 50 rows
+    # 3) coding — 50 rows (25 distinct pairs x 2 phrasings; no repeats)
     for q, a in CODING:
-        rows.append({"instruction": q, "input": "", "output": a, "_cat": "coding"})
-    code_extra = [
-        ("Python: how do I sort a list of dicts by a key?",
-         "sorted(items, key=lambda d: d['price'])"),
-        ("How do I generate a random number in JS?",
-         "Math.floor(Math.random() * 100)  // 0-99"),
-        ("Bash: count lines in a file.",
-         "wc -l file.txt"),
-        ("How do I pretty-print JSON on the command line?",
-         "cat data.json | python3 -m json.tool"),
-        ("SQL: delete duplicates, keep one.",
-         "DELETE FROM t WHERE id NOT IN (SELECT MIN(id) FROM t GROUP BY email);"),
-    ]
-    for round_no in range(7):  # 5 extra x 7 rounds = 35 -> total 15+35 = 50
-        for q, a in code_extra:
-            if len([r for r in rows if r["_cat"] == "coding"]) >= 50:
-                break
-            rows.append({"instruction": q, "input": "", "output": a, "_cat": "coding"})
-        if len([r for r in rows if r["_cat"] == "coding"]) >= 50:
-            break
+        for p in CODING_PHRASINGS:
+            rows.append({"instruction": p.format(q), "input": "", "output": a, "_cat": "coding"})
+    assert len([r for r in rows if r["_cat"] == "coding"]) == 50, \
+        f"coding rows: {len([r for r in rows if r['_cat'] == 'coding'])}"
 
     # 4) general — 40 rows (10 base x 4 phrasings)
     for q, a in GENERAL:
